@@ -1,0 +1,10 @@
+diff --git a/logd/Makefile.am b/logd/Makefile.am
+index 29c4d3e12..13af4d154 100644
+--- a/logd/Makefile.am
++++ b/logd/Makefile.am
+@@ -28,4 +28,4 @@ logd_CPPFLAGS += -DLOGD_DROP_PRIVS
+ endif
+ 
+ logd_LDADD  = ../libsysutils/libsysutils.la
+-logd_LDFLAGS = -llog -lcutils -lbase -lpthread -lutils
++logd_LDFLAGS = -llog -lcutils -lbase -lpthread -lutils -latomic
