@@ -1,0 +1,14 @@
+diff --git a/meta-swi/build.sh b/meta-swi/build.sh
+index 5b29c6ecc..51a234513 100755
+--- a/build.sh
++++ b/build.sh
+@@ -291,6 +291,9 @@ case $MACH in
+             # Distro to poky-swi-ext to change SDKPATH
+             DISTRO="poky-swi-ext"
+         fi
++        if [ $QEMU = true ]; then
++            bitbake-layers add-layer $SWI/meta-$MACH-virt
++        fi
+         ;;
+ esac
+ 
