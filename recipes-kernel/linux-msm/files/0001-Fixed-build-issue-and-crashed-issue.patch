@@ -1,10 +1,10 @@
-From ecccb858f4f44b99ea55b4795a076caa8c55d441 Mon Sep 17 00:00:00 2001
+From abac611374f5371fe38c3a9e2216503871be2376 Mon Sep 17 00:00:00 2001
 From: Jarch Hu <jarhu@sierrawireless.com>
 Date: Tue, 7 May 2019 14:21:31 +0800
 Subject: [PATCH] Fixed build issue and crashed issue.
 
 Fixed build issue for vexpress platform.
-
+Select CONFIG_PINCTRL for vexpress platform.
 Fixed the below crashed issue:
 [    0.000213] sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 89478484971ns
 [    0.001616] Unable to handle kernel NULL pointer dereference at virtual address 00000019
@@ -27,9 +27,10 @@ Fixed the below crashed issue:
 
 Signed-off-by: Jarch Hu <jarhu@sierrawireless.com>
 ---
- Makefile          |    4 +-
- drivers/clk/clk.c | 1527 ++-------------------------------------------
- 2 files changed, 41 insertions(+), 1490 deletions(-)
+ Makefile                       |    4 +-
+ arch/arm/mach-vexpress/Kconfig |    1 +
+ drivers/clk/clk.c              | 1527 +-------------------------------
+ 3 files changed, 42 insertions(+), 1490 deletions(-)
 
 diff --git a/Makefile b/Makefile
 index 52ca365a4ff3..2e194983f6ea 100644
@@ -49,6 +50,18 @@ index 52ca365a4ff3..2e194983f6ea 100644
  KBUILD_CPPFLAGS := -D__KERNEL__
  KBUILD_AFLAGS_KERNEL :=
  KBUILD_CFLAGS_KERNEL :=
+diff --git a/arch/arm/mach-vexpress/Kconfig b/arch/arm/mach-vexpress/Kconfig
+index 726a68085c3b..f4a5eb666c36 100644
+--- a/arch/arm/mach-vexpress/Kconfig
++++ b/arch/arm/mach-vexpress/Kconfig
+@@ -23,6 +23,7 @@ menuconfig ARCH_VEXPRESS
+ 	select VEXPRESS_CONFIG
+ 	select VEXPRESS_SYSCFG
+ 	select MFD_VEXPRESS_SYSREG
++	select PINCTRL
+ 	help
+ 	  This option enables support for systems using Cortex processor based
+ 	  ARM core and logic (FPGA) tiles on the Versatile Express motherboard,
 diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
 index 19c374092812..a3f52f678211 100644
 --- a/drivers/clk/clk.c

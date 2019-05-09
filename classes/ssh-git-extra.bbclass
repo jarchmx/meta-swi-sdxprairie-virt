@@ -42,7 +42,6 @@ do_unpack() {
     if [ -z ${S} ]; then
         return 1
     fi
-    #rm -rf ${S} ${B}
 	if [ ! -d ${S}/.git ];then
 	   git clone file://${DL_DIR}/git2/${temp} ${S}
 	fi
