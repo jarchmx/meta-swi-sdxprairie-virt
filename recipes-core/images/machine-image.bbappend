@@ -11,7 +11,7 @@
 #IMAGE_INSTALL_remove = "securemsm securemsm-noship loc-eng-hub loc-epdr xtra-daemon engine-plugin gdtap-adapter izat-client-api rtsp-alg atfwd-daemon diag-reboot-app mbim nmea-test-app qmi-shutdown-modem qmi-simple-ril"
 #IMAGE_INSTALL_remove = "slim-common slim-client slim-utils time-services data-module loc-api-v02"
 
-IMAGE_INSTALL_remove = "emac-dwc-eqos"
+IMAGE_INSTALL_remove = "emac-dwc-eqos gsb"
 do_makesystem() {
-
+    echo fake do_makesystem
 }

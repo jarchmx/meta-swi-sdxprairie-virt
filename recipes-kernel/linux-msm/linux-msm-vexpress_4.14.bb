@@ -2,10 +2,10 @@ require recipes-kernel/linux-msm/linux-msm_4.14.bb
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "file://defconfig \
-           file://0001-Fixed-build-issue-and-crashed-issue.patch \
-           file://systemd.cfg"
+           file://0001-Fixed-build-issue-and-crashed-issue.patch "
 
 COMPATIBLE_MACHINE_swi-sdxprairie-qemu = "swi-sdxprairie-qemu"
+KERNEL_DEVICETREE_swi-sdxprairie-qemu = "vexpress-v2p-ca9.dtb"
 
 DEPENDS_remove = "llvm-arm-toolchain-native"
 
