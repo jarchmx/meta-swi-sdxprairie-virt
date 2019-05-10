@@ -8,7 +8,10 @@
 
 ### Build the image:
   - cd to ROOT directory of yocto, run 'QEMU=1 make image_src' to build the image.
-
+   #### For future build,  you can follow the below steps:
+  - cd to poky directory of yocto.
+  - run '. ./oe-init-build-env ../build_src/' to initialize the env.
+  - run 'bitbake machine-image'
 ### Run the emulator.
   - cd to poky directory of yocto.
   - run '. ./oe-init-build-env  ../build_src/' to initialize the env. 
