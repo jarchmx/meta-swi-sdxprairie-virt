@@ -1,0 +1,1 @@
+inherit qprebuilt-setup
