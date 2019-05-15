@@ -12,6 +12,7 @@
 #IMAGE_INSTALL_remove = "slim-common slim-client slim-utils time-services data-module loc-api-v02"
 
 IMAGE_INSTALL_remove = "gsb"
+IMAGE_INSTALL_append = " systemd"
 do_makesystem() {
     echo fake do_makesystem
 }
