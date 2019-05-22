@@ -1,10 +1,11 @@
-From 1155d8e78a0458f704ab3cc0b7626ff54654d028 Mon Sep 17 00:00:00 2001
+From f4a6f10dcfdf4c467e47e4cc346cabf542724e31 Mon Sep 17 00:00:00 2001
 From: Jarch Hu <jarhu@sierrawireless.com>
 Date: Tue, 7 May 2019 14:21:31 +0800
 Subject: [PATCH] Fixed build issue and crashed issue.
 
 Fixed build issue for vexpress platform.
 Select CONFIG_PINCTRL for vexpress platform.
+Select GENERIC_PINCONF For vexpress platform.
 Select SND_SOC_COMPRESS for vexpress platform.
 Fixed the below crashed issue:
 [    0.000213] sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 89478484971ns
@@ -29,9 +30,9 @@ Fixed the below crashed issue:
 Signed-off-by: Jarch Hu <jarhu@sierrawireless.com>
 ---
  Makefile                       |    4 +-
- arch/arm/mach-vexpress/Kconfig |    2 +
+ arch/arm/mach-vexpress/Kconfig |    3 +
  drivers/clk/clk.c              | 1527 +-------------------------------
- 3 files changed, 43 insertions(+), 1490 deletions(-)
+ 3 files changed, 44 insertions(+), 1490 deletions(-)
 
 diff --git a/Makefile b/Makefile
 index 52ca365a4ff3..2e194983f6ea 100644
@@ -52,14 +53,15 @@ index 52ca365a4ff3..2e194983f6ea 100644
  KBUILD_AFLAGS_KERNEL :=
  KBUILD_CFLAGS_KERNEL :=
 diff --git a/arch/arm/mach-vexpress/Kconfig b/arch/arm/mach-vexpress/Kconfig
-index 726a68085c3b..c9c78695daec 100644
+index 726a68085c3b..ff84e88d6a24 100644
 --- a/arch/arm/mach-vexpress/Kconfig
 +++ b/arch/arm/mach-vexpress/Kconfig
-@@ -23,6 +23,8 @@ menuconfig ARCH_VEXPRESS
+@@ -23,6 +23,9 @@ menuconfig ARCH_VEXPRESS
  	select VEXPRESS_CONFIG
  	select VEXPRESS_SYSCFG
  	select MFD_VEXPRESS_SYSREG
 +	select PINCTRL
++    select GENERIC_PINCONF 
 +	select SND_SOC_COMPRESS
  	help
  	  This option enables support for systems using Cortex processor based
