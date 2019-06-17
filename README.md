@@ -8,6 +8,7 @@
 
 ### Build the image:
   - cd to ROOT directory of yocto, run 'QEMU=1 BUILDDIR=build_qemu make image_src' to build the image.
+  
   please notice that the build directory is build_qemu with the upper command.
    #### For future build,  you can follow the below steps:
   - cd to poky directory of yocto.
