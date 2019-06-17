@@ -78,6 +78,7 @@ do_shared_workdir_append () {
         cp ${STAGING_KERNEL_DIR}/scripts/gen_initramfs_list.sh $kerneldir/scripts/
 
         # Copy vmlinux and zImage into deplydir for boot.img creation
+        mkdir -p ${DEPLOY_DIR_IMAGE}/
         install -m 0644 ${KERNEL_OUTPUT_DIR}/${KERNEL_IMAGETYPE} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}
         install -m 0644 vmlinux ${DEPLOY_DIR_IMAGE}
 

@@ -53,6 +53,7 @@ python do_unpack() {
 
     if not os.path.exists(srcdirg):
         os.system("cd %s && git clone %s %s" % (work_dir,dl_src,src_dir))
+        os.system("cd %s && git remote set-url origin %s" % (src_dir, src_git))
         os.system("cd %s && git checkout %s && git pull" % (src_dir, srcrev)) 
 }
 
