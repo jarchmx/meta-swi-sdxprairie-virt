@@ -38,7 +38,6 @@ do_fetch() {
 
 python do_unpack() {
     src_git = d.getVar('SRCGIT', True)
-	#src_dir = d.getVar('S', True)
     src_dir = os.path.abspath(d.getVar('S'))
     work_dir = d.getVar('WORKDIR',True)
     dl_dir =  d.getVar('DL_DIR',True)
