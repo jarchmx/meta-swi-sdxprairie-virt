@@ -36,6 +36,7 @@ SRCGIT = "git://cnshz-er-git01/external/privcaf/external/private_le/kernel/msm-4
 
 do_deploy_append() {
     install -m 0644 ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${DEPLOY_DIR_IMAGE}/
+    install -m 0644 ${D}/${KERNEL_IMAGEDEST}/vmlinux-${KERNEL_VERSION} ${DEPLOY_DIR_IMAGE}/
 }
 
 do_shared_workdir_append () {
@@ -76,11 +77,6 @@ do_shared_workdir_append () {
         fi
 
         cp ${STAGING_KERNEL_DIR}/scripts/gen_initramfs_list.sh $kerneldir/scripts/
-
-        # Copy vmlinux and zImage into deplydir for boot.img creation
-        mkdir -p ${DEPLOY_DIR_IMAGE}/
-        install -m 0644 ${KERNEL_OUTPUT_DIR}/${KERNEL_IMAGETYPE} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}
-        install -m 0644 vmlinux ${DEPLOY_DIR_IMAGE}
 
         # Generate kernel headers
         oe_runmake_call -C ${STAGING_KERNEL_DIR} ARCH=${ARCH} CC="${KERNEL_CC}" LD="${KERNEL_LD}" headers_install O=${STAGING_KERNEL_BUILDDIR}
