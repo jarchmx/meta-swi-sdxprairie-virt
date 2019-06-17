@@ -17,7 +17,7 @@ python () {
 
 do_clean_git() {
     cd ${DL_DIR}
-    temp=`echo ${SRCGIT} | tr -s /:- _`
+    temp=`echo ${SRCGIT} | sed -e 's/\:/_/g' -e 's/\//_/g' -e 's/\-/_/g'`
     if [ -d git2/${temp} -o -e git2/${temp}.done ]; then
         rm -rf ./git2/${temp}*
     fi
@@ -27,7 +27,7 @@ addtask clean_git before do_cleanall after do_clean
 
 do_fetch() {
     mkdir -p git2
-    temp=`echo ${SRCGIT} | tr -s /:- _`
+    temp=`echo ${SRCGIT} | sed -e 's/\:/_/g' -e 's/\//_/g' -e 's/\-/_/g'`
     cd git2
     if [ ! -e ./${temp}.done ]; then
         rm -rf ./${temp}
@@ -36,24 +36,25 @@ do_fetch() {
     fi
 }
 
-do_unpack() {
-    cd ${WORKDIR}
-    temp=`echo ${SRCGIT} | tr -s /:- _`
-    if [ -z ${S} ]; then
-        return 1
-    fi
-	if [ ! -d ${S}/.git ];then
-	   git clone file://${DL_DIR}/git2/${temp} ${S}
-	fi
-    
-    cd ${S} &&git remote set-url origin ${SRCGIT}
-    if [ ! -z ${SRCREV} ];then
-	   cd ${S} && git checkout ${SRCREV} 
-    elif [ ! -z ${SRCBRANCH} ];then
-       cd ${S} && git checkout ${SRCBRANCH} && git pull
-    else
-       cd ${S} && git checkout ${master} && git pull
-    fi
+python do_unpack() {
+    src_git = d.getVar('SRCGIT', True)
+	#src_dir = d.getVar('S', True)
+    src_dir = os.path.abspath(d.getVar('S'))
+    work_dir = d.getVar('WORKDIR',True)
+    dl_dir =  d.getVar('DL_DIR',True)
+
+    temp = src_git.replace('/','_')
+    temp = temp.replace(':','_')
+    temp = temp.replace('-','_')
+    dl_src = dl_dir + '/git2/' + temp 
+
+    srcdirg = src_dir + '.git'
+
+    srcrev = d.getVar('SRCREV',True) or d.getVar('SRCBRANCH',True) or "master"
+
+    if not os.path.exists(srcdirg):
+        os.system("cd %s && git clone %s %s" % (work_dir,dl_src,src_dir))
+        os.system("cd %s && git checkout %s && git pull" % (src_dir, srcrev)) 
 }
 
 python do_unpack_extra() {
