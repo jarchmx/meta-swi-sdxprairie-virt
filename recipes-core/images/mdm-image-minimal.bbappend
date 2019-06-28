@@ -56,3 +56,5 @@ determine_kernel_versions() {
         exit 1
     fi
 }
+
+do_generate_cwe[noexec] = "1"
